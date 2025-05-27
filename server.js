@@ -9,12 +9,21 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+// For simple connection (without pooling)
 const db = mysql.createConnection({
-  host: "feenix-mariadb.swin.edu.au",
-  user: "s105075090", // e.g., 's104762100'
-  password: "201205",
+  host: "localhost",
+  user: "root",
+  password: "",
   database: "s105075090_db",
 });
+
+// const db = mysql.createConnection({
+//   // host: "localhost",
+//   // host: "feenix-mariadb.swin.edu.au",
+//   user: "s105075090", // e.g., 's104762100'
+//   password: "201205",
+//   database: "s105075090_db",
+// });
 // const db = mysql.createConnection({
 //   host: "feenix-mariadb.swin.edu.au",
 //   user: "s104762100", // e.g., 's104762100'
@@ -32,6 +41,24 @@ db.connect((err) => {
 
 app.get("/api/archers", (req, res) => {
   db.query("SELECT * FROM Archer", (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(results);
+  });
+});
+app.get("/api/rounds", (req, res) => {
+  db.query("SELECT * FROM Round", (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(results);
+  });
+});
+app.get("/api/divisions", (req, res) => {
+  db.query("SELECT * FROM Division", (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(results);
+  });
+});
+app.get("/api/roundRanges", (req, res) => {
+  db.query("SELECT * FROM RoundRange", (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results);
   });

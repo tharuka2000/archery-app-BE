@@ -1,7 +1,18 @@
 {
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "name": "archery-app-BE",
+  "version": "1.0.0",
+  "description": "Backend for Archery App",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "mysql2": "^3.14.1"
+  },
+
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
